@@ -1,0 +1,41 @@
+# Global config used by scripts
+random_seed: 42
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  splits_dir: data/splits
+  models_dir: models
+  outputs_dir: outputs
+
+classic:
+  tfidf:
+    max_features: 200000
+    ngram_range: [1, 2]
+    min_df: 2
+    max_df: 0.95
+    sublinear_tf: true
+    lowercase: true
+  logreg:
+    C: 2.0
+    max_iter: 2000
+    n_jobs: -1
+
+transformer:
+  model_name: distilbert-base-uncased
+  max_length: 384
+  lr: 2.0e-5
+  weight_decay: 0.01
+  epochs: 3
+  per_device_train_batch_size: 16
+  per_device_eval_batch_size: 32
+  gradient_accumulation_steps: 2
+  warmup_ratio: 0.06
+  fp16: true
+  gradient_checkpointing: true
+  eval_strategy: epoch
+  save_strategy: epoch
+  logging_steps: 50
+  load_best_model_at_end: true
+  metric_for_best_model: f1
+
+num_workers: 4
